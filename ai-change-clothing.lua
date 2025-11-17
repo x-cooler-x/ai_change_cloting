@@ -8,10 +8,10 @@ ScreenGui.Name = "ClothingChanger"
 ScreenGui.Parent = CoreGui
 ScreenGui.ResetOnSpawn = false
 
--- Основной фрейм
+-- Основной фрейм (уменьшенная высота)
 local MainFrame = Instance.new("Frame")
-MainFrame.Size = UDim2.new(0, 350, 0, 400)
-MainFrame.Position = UDim2.new(0.5, -175, 0.5, -200)
+MainFrame.Size = UDim2.new(0, 350, 0, 300)  -- Было 400, стало 300
+MainFrame.Position = UDim2.new(0.5, -175, 0.5, -150)  -- Скорректирована позиция
 MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
 MainFrame.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
 MainFrame.BorderSizePixel = 0
@@ -24,7 +24,7 @@ UICorner.Parent = MainFrame
 
 -- Заголовок с кнопками управления
 local Title = Instance.new("Frame")
-Title.Size = UDim2.new(1, 0, 0, 50)
+Title.Size = UDim2.new(1, 0, 0, 40)  -- Уменьшена высота заголовка
 Title.Position = UDim2.new(0, 0, 0, 0)
 Title.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
 Title.BorderSizePixel = 0
@@ -41,21 +41,21 @@ TitleText.Position = UDim2.new(0, 10, 0, 0)
 TitleText.BackgroundTransparency = 1
 TitleText.Text = "change of clothing"
 TitleText.TextColor3 = Color3.fromRGB(255, 255, 255)
-TitleText.TextSize = 20
+TitleText.TextSize = 18  -- Уменьшен размер текста
 TitleText.Font = Enum.Font.GothamBold
 TitleText.TextXAlignment = Enum.TextXAlignment.Left
 TitleText.Parent = Title
 
 -- Кнопка сворачивания
 local MinimizeButton = Instance.new("TextButton")
-MinimizeButton.Size = UDim2.new(0, 25, 0, 25)
-MinimizeButton.Position = UDim2.new(1, -60, 0.5, -12)
+MinimizeButton.Size = UDim2.new(0, 22, 0, 22)  -- Уменьшен размер кнопки
+MinimizeButton.Position = UDim2.new(1, -55, 0.5, -11)  -- Скорректирована позиция
 MinimizeButton.AnchorPoint = Vector2.new(1, 0.5)
 MinimizeButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
 MinimizeButton.BorderSizePixel = 0
 MinimizeButton.Text = "_"
 MinimizeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-MinimizeButton.TextSize = 16
+MinimizeButton.TextSize = 14  -- Уменьшен размер текста
 MinimizeButton.Font = Enum.Font.GothamBold
 MinimizeButton.Parent = Title
 
@@ -65,8 +65,8 @@ MinimizeCorner.Parent = MinimizeButton
 
 -- Кнопка закрытия
 local CloseButton = Instance.new("TextButton")
-CloseButton.Size = UDim2.new(0, 25, 0, 25)
-CloseButton.Position = UDim2.new(1, -25, 0.5, -12)
+CloseButton.Size = UDim2.new(0, 22, 0, 22)  -- Уменьшен размер кнопки
+CloseButton.Position = UDim2.new(1, -25, 0.5, -11)  -- Скорректирована позиция
 CloseButton.AnchorPoint = Vector2.new(1, 0.5)
 CloseButton.BackgroundColor3 = Color3.fromRGB(200, 60, 60)
 CloseButton.BorderSizePixel = 0
@@ -82,8 +82,8 @@ CloseCorner.Parent = CloseButton
 
 -- Контент фрейм (будет сворачиваться)
 local ContentFrame = Instance.new("Frame")
-ContentFrame.Size = UDim2.new(1, 0, 1, -50)
-ContentFrame.Position = UDim2.new(0, 0, 0, 50)
+ContentFrame.Size = UDim2.new(1, 0, 1, -40)  -- Скорректирована высота
+ContentFrame.Position = UDim2.new(0, 0, 0, 40)  -- Скорректирована позиция
 ContentFrame.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
 ContentFrame.BorderSizePixel = 0
 ContentFrame.ClipsDescendants = true
@@ -95,25 +95,25 @@ ContentCorner.Parent = ContentFrame
 
 -- Поле для айди рубашки
 local ShirtLabel = Instance.new("TextLabel")
-ShirtLabel.Size = UDim2.new(0.9, 0, 0, 25)
-ShirtLabel.Position = UDim2.new(0.05, 0, 0.2, 0)
+ShirtLabel.Size = UDim2.new(0.9, 0, 0, 20)  -- Уменьшена высота
+ShirtLabel.Position = UDim2.new(0.05, 0, 0.15, 0)  -- Скорректирована позиция
 ShirtLabel.BackgroundTransparency = 1
 ShirtLabel.Text = "Shirt ID:"
 ShirtLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
-ShirtLabel.TextSize = 14
+ShirtLabel.TextSize = 13  -- Уменьшен размер текста
 ShirtLabel.TextXAlignment = Enum.TextXAlignment.Left
 ShirtLabel.Font = Enum.Font.Gotham
 ShirtLabel.Parent = ContentFrame
 
 local ShirtBox = Instance.new("TextBox")
-ShirtBox.Size = UDim2.new(0.9, 0, 0, 35)
-ShirtBox.Position = UDim2.new(0.05, 0, 0.25, 0)
+ShirtBox.Size = UDim2.new(0.9, 0, 0, 30)  -- Уменьшена высота
+ShirtBox.Position = UDim2.new(0.05, 0, 0.22, 0)  -- Скорректирована позиция
 ShirtBox.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
 ShirtBox.BorderSizePixel = 0
 ShirtBox.Text = ""
 ShirtBox.PlaceholderText = "Enter shirt asset ID..."
 ShirtBox.TextColor3 = Color3.fromRGB(255, 255, 255)
-ShirtBox.TextSize = 14
+ShirtBox.TextSize = 13  -- Уменьшен размер текста
 ShirtBox.Font = Enum.Font.Gotham
 ShirtBox.Parent = ContentFrame
 
@@ -123,25 +123,25 @@ ShirtCorner.Parent = ShirtBox
 
 -- Поле для айди штанов
 local PantsLabel = Instance.new("TextLabel")
-PantsLabel.Size = UDim2.new(0.9, 0, 0, 25)
-PantsLabel.Position = UDim2.new(0.05, 0, 0.45, 0)
+PantsLabel.Size = UDim2.new(0.9, 0, 0, 20)  -- Уменьшена высота
+PantsLabel.Position = UDim2.new(0.05, 0, 0.45, 0)  -- Скорректирована позиция
 PantsLabel.BackgroundTransparency = 1
 PantsLabel.Text = "Pants ID:"
 PantsLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
-PantsLabel.TextSize = 14
+PantsLabel.TextSize = 13  -- Уменьшен размер текста
 PantsLabel.TextXAlignment = Enum.TextXAlignment.Left
 PantsLabel.Font = Enum.Font.Gotham
 PantsLabel.Parent = ContentFrame
 
 local PantsBox = Instance.new("TextBox")
-PantsBox.Size = UDim2.new(0.9, 0, 0, 35)
-PantsBox.Position = UDim2.new(0.05, 0, 0.5, 0)
+PantsBox.Size = UDim2.new(0.9, 0, 0, 30)  -- Уменьшена высота
+PantsBox.Position = UDim2.new(0.05, 0, 0.52, 0)  -- Скорректирована позиция
 PantsBox.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
 PantsBox.BorderSizePixel = 0
 PantsBox.Text = ""
 PantsBox.PlaceholderText = "Enter pants asset ID..."
 PantsBox.TextColor3 = Color3.fromRGB(255, 255, 255)
-PantsBox.TextSize = 14
+PantsBox.TextSize = 13  -- Уменьшен размер текста
 PantsBox.Font = Enum.Font.Gotham
 PantsBox.Parent = ContentFrame
 
@@ -151,13 +151,13 @@ PantsCorner.Parent = PantsBox
 
 -- Кнопка применения
 local ApplyButton = Instance.new("TextButton")
-ApplyButton.Size = UDim2.new(0.9, 0, 0, 45)
-ApplyButton.Position = UDim2.new(0.05, 0, 0.75, 0)
+ApplyButton.Size = UDim2.new(0.9, 0, 0, 35)  -- Уменьшена высота
+ApplyButton.Position = UDim2.new(0.05, 0, 0.78, 0)  -- Скорректирована позиция
 ApplyButton.BackgroundColor3 = Color3.fromRGB(178, 85, 255)
 ApplyButton.BorderSizePixel = 0
 ApplyButton.Text = "Apply clothes"
 ApplyButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-ApplyButton.TextSize = 16
+ApplyButton.TextSize = 14  -- Уменьшен размер текста
 ApplyButton.Font = Enum.Font.GothamBold
 ApplyButton.Parent = ContentFrame
 
@@ -167,19 +167,19 @@ ApplyCorner.Parent = ApplyButton
 
 -- Текст результата
 local ResultText = Instance.new("TextLabel")
-ResultText.Size = UDim2.new(0.9, 0, 0, 30)
-ResultText.Position = UDim2.new(0.05, 0, 0.67, 0)
+ResultText.Size = UDim2.new(0.9, 0, 0, 25)  -- Уменьшена высота
+ResultText.Position = UDim2.new(0.05, 0, 0.65, 0)  -- Скорректирована позиция
 ResultText.BackgroundTransparency = 1
 ResultText.Text = ""
 ResultText.TextColor3 = Color3.fromRGB(255, 255, 255)
-ResultText.TextSize = 12
+ResultText.TextSize = 11  -- Уменьшен размер текста
 ResultText.Font = Enum.Font.Gotham
 ResultText.Parent = ContentFrame
 
 -- Переменная для состояния сворачивания
 local isMinimized = false
 local originalSize = MainFrame.Size
-local minimizedSize = UDim2.new(0, 350, 0, 50)
+local minimizedSize = UDim2.new(0, 350, 0, 40)  -- Уменьшен размер сворачивания
 
 -- Функция для скрытия сообщения через указанное время
 local function hideMessageAfterDelay(delayTime)
