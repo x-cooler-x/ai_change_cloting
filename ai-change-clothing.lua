@@ -5,8 +5,8 @@ local CoreGui = game:GetService("CoreGui")
 -- Создание основного GUI
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "ClothingChanger"
-ScreenGui.Parent = CoreGui -- Изменено с PlayerGui на CoreGui
-ScreenGui.ResetOnSpawn = false -- Важно: отключаем сброс при возрождении
+ScreenGui.Parent = CoreGui
+ScreenGui.ResetOnSpawn = false
 
 -- Основной фрейм
 local MainFrame = Instance.new("Frame")
@@ -17,7 +17,6 @@ MainFrame.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
 MainFrame.BorderSizePixel = 0
 MainFrame.Parent = ScreenGui
 
--- Остальной код остается без изменений...
 -- Скругление углов
 local UICorner = Instance.new("UICorner")
 UICorner.CornerRadius = UDim.new(0, 8)
@@ -94,40 +93,12 @@ local ContentCorner = Instance.new("UICorner")
 ContentCorner.CornerRadius = UDim.new(0, 8)
 ContentCorner.Parent = ContentFrame
 
--- Поле для ввода ника игрока
-local UsernameLabel = Instance.new("TextLabel")
-UsernameLabel.Size = UDim2.new(0.9, 0, 0, 25)
-UsernameLabel.Position = UDim2.new(0.05, 0, 0.1, 0)
-UsernameLabel.BackgroundTransparency = 1
-UsernameLabel.Text = "Player nickname:"
-UsernameLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
-UsernameLabel.TextSize = 14
-UsernameLabel.TextXAlignment = Enum.TextXAlignment.Left
-UsernameLabel.Font = Enum.Font.Gotham
-UsernameLabel.Parent = ContentFrame
-
-local UsernameBox = Instance.new("TextBox")
-UsernameBox.Size = UDim2.new(0.9, 0, 0, 35)
-UsernameBox.Position = UDim2.new(0.05, 0, 0.15, 0)
-UsernameBox.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
-UsernameBox.BorderSizePixel = 0
-UsernameBox.Text = ""
-UsernameBox.PlaceholderText = "type player nickname..."
-UsernameBox.TextColor3 = Color3.fromRGB(255, 255, 255)
-UsernameBox.TextSize = 14
-UsernameBox.Font = Enum.Font.Gotham
-UsernameBox.Parent = ContentFrame
-
-local UsernameCorner = Instance.new("UICorner")
-UsernameCorner.CornerRadius = UDim.new(0, 6)
-UsernameCorner.Parent = UsernameBox
-
 -- Поле для айди рубашки
 local ShirtLabel = Instance.new("TextLabel")
 ShirtLabel.Size = UDim2.new(0.9, 0, 0, 25)
-ShirtLabel.Position = UDim2.new(0.05, 0, 0.3, 0)
+ShirtLabel.Position = UDim2.new(0.05, 0, 0.2, 0)
 ShirtLabel.BackgroundTransparency = 1
-ShirtLabel.Text = "Id decal shirt:"
+ShirtLabel.Text = "Shirt ID:"
 ShirtLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
 ShirtLabel.TextSize = 14
 ShirtLabel.TextXAlignment = Enum.TextXAlignment.Left
@@ -136,11 +107,11 @@ ShirtLabel.Parent = ContentFrame
 
 local ShirtBox = Instance.new("TextBox")
 ShirtBox.Size = UDim2.new(0.9, 0, 0, 35)
-ShirtBox.Position = UDim2.new(0.05, 0, 0.35, 0)
+ShirtBox.Position = UDim2.new(0.05, 0, 0.25, 0)
 ShirtBox.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
 ShirtBox.BorderSizePixel = 0
 ShirtBox.Text = ""
-ShirtBox.PlaceholderText = "type Id decal shirt:"
+ShirtBox.PlaceholderText = "Enter shirt asset ID..."
 ShirtBox.TextColor3 = Color3.fromRGB(255, 255, 255)
 ShirtBox.TextSize = 14
 ShirtBox.Font = Enum.Font.Gotham
@@ -153,9 +124,9 @@ ShirtCorner.Parent = ShirtBox
 -- Поле для айди штанов
 local PantsLabel = Instance.new("TextLabel")
 PantsLabel.Size = UDim2.new(0.9, 0, 0, 25)
-PantsLabel.Position = UDim2.new(0.05, 0, 0.5, 0)
+PantsLabel.Position = UDim2.new(0.05, 0, 0.45, 0)
 PantsLabel.BackgroundTransparency = 1
-PantsLabel.Text = "Id decal pants:"
+PantsLabel.Text = "Pants ID:"
 PantsLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
 PantsLabel.TextSize = 14
 PantsLabel.TextXAlignment = Enum.TextXAlignment.Left
@@ -164,11 +135,11 @@ PantsLabel.Parent = ContentFrame
 
 local PantsBox = Instance.new("TextBox")
 PantsBox.Size = UDim2.new(0.9, 0, 0, 35)
-PantsBox.Position = UDim2.new(0.05, 0, 0.55, 0)
+PantsBox.Position = UDim2.new(0.05, 0, 0.5, 0)
 PantsBox.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
 PantsBox.BorderSizePixel = 0
 PantsBox.Text = ""
-PantsBox.PlaceholderText = "type Id decal pants..."
+PantsBox.PlaceholderText = "Enter pants asset ID..."
 PantsBox.TextColor3 = Color3.fromRGB(255, 255, 255)
 PantsBox.TextSize = 14
 PantsBox.Font = Enum.Font.Gotham
@@ -210,12 +181,17 @@ local isMinimized = false
 local originalSize = MainFrame.Size
 local minimizedSize = UDim2.new(0, 350, 0, 50)
 
+-- Функция для скрытия сообщения через указанное время
+local function hideMessageAfterDelay(delayTime)
+    wait(delayTime)
+    ResultText.Text = ""
+end
+
 -- Функция сворачивания/разворачивания
 local function toggleMinimize()
     if isMinimized then
         -- Разворачиваем
         TweenService:Create(MainFrame, TweenInfo.new(0.3), {Size = originalSize}):Play()
-        TweenService:Create(ContentFrame, TweenInfo.new(0.3), {BackgroundTransparency = 0}):Play()
         MinimizeButton.Text = "_"
         isMinimized = false
         
@@ -232,13 +208,12 @@ local function toggleMinimize()
         isMinimized = true
         
         -- Прячем элементы контента после анимации
-        delay(0.3, function()
-            for _, child in ipairs(ContentFrame:GetChildren()) do
-                if child:IsA("GuiObject") then
-                    child.Visible = false
-                end
+        wait(0.3)
+        for _, child in ipairs(ContentFrame:GetChildren()) do
+            if child:IsA("GuiObject") then
+                child.Visible = false
             end
-        end)
+        end
     end
 end
 
@@ -249,70 +224,57 @@ local function closeGUI()
     ScreenGui:Destroy()
 end
 
--- Функция для скрытия сообщения через указанное время
-local function hideMessageAfterDelay(delay)
-    delay(delay)
-    ResultText.Text = ""
-end
-
--- Функция для изменения одежды
+-- Функция для изменения одежды своего персонажа
 local function changeClothing()
-    local username = UsernameBox.Text
     local shirtId = ShirtBox.Text
     local pantsId = PantsBox.Text
     
     -- Проверка введенных данных
-    if username == "" then
-        ResultText.Text = "Enter the player's nickname!"
-        ResultText.TextColor3 = Color3.fromRGB(255, 100, 100)
-        hideMessageAfterDelay(wait(1))
-        return
-    end
-    
     if shirtId == "" and pantsId == "" then
         ResultText.Text = "Enter clothing ID!"
         ResultText.TextColor3 = Color3.fromRGB(255, 100, 100)
-        hideMessageAfterDelay(wait(1))
+        hideMessageAfterDelay(1)
         return
     end
     
-    -- Поиск игрока
-    local player = game.Workspace.Characters:FindFirstChild(username)
+    -- Получаем своего персонажа
+    local player = Players.LocalPlayer
+    local character = player.Character
     
-    if not player then
-        ResultText.Text = "Player '" .. username .. "' not found!"
+    if not character then
+        ResultText.Text = "Character not found!"
         ResultText.TextColor3 = Color3.fromRGB(255, 100, 100)
-        hideMessageAfterDelay(wait(1))
+        hideMessageAfterDelay(1)
         return
     end
     
     -- Изменение рубашки
     if shirtId ~= "" then
-        if player:FindFirstChild("Shirt") then
-            player.Shirt.ShirtTemplate = "rbxassetid://" .. shirtId
+        if character:FindFirstChild("Shirt") then
+            character.Shirt.ShirtTemplate = "rbxassetid://" .. shirtId
         else
-            ResultText.Text = "The player's shirt was not found!"
+            ResultText.Text = "Shirt not found on character!"
             ResultText.TextColor3 = Color3.fromRGB(255, 100, 100)
-            hideMessageAfterDelay(wait(1))
+            hideMessageAfterDelay(1)
             return
         end
     end
     
     -- Изменение штанов
     if pantsId ~= "" then
-        if player:FindFirstChild("Pants") then
-            player.Pants.PantsTemplate = "rbxassetid://" .. pantsId
+        if character:FindFirstChild("Pants") then
+            character.Pants.PantsTemplate = "rbxassetid://" .. pantsId
         else
-            ResultText.Text = "The player's pants are not found!"
+            ResultText.Text = "Pants not found on character!"
             ResultText.TextColor3 = Color3.fromRGB(255, 100, 100)
-            hideMessageAfterDelay(wait(1))
+            hideMessageAfterDelay(1)
             return
         end
     end
     
     ResultText.Text = "Clothing changed successfully!"
     ResultText.TextColor3 = Color3.fromRGB(100, 255, 100)
-    hideMessageAfterDelay(wait(1))
+    hideMessageAfterDelay(1)
 end
 
 -- Обработчики кнопок
