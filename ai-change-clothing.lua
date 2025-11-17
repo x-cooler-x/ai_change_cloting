@@ -1,10 +1,12 @@
 local Players = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
+local CoreGui = game:GetService("CoreGui")
 
 -- Создание основного GUI
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "ClothingChanger"
-ScreenGui.Parent = Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.Parent = CoreGui -- Изменено с PlayerGui на CoreGui
+ScreenGui.ResetOnSpawn = false -- Важно: отключаем сброс при возрождении
 
 -- Основной фрейм
 local MainFrame = Instance.new("Frame")
@@ -15,6 +17,7 @@ MainFrame.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
 MainFrame.BorderSizePixel = 0
 MainFrame.Parent = ScreenGui
 
+-- Остальной код остается без изменений...
 -- Скругление углов
 local UICorner = Instance.new("UICorner")
 UICorner.CornerRadius = UDim.new(0, 8)
